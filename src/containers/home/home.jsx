@@ -9,6 +9,8 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Card from '@material-ui/core/Card';
 import { auth } from '../../auth'
 import Profile from '../profile/profile'
+import Survey from '../survey/survey'
+import { API } from '../../api_path_constants';
 
 const styles = theme => ({
   root: {
@@ -40,7 +42,7 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ['First, Tell Us About Yourself', 'Where would you like to live', 'What Type(s) Of Property Are You Looking For?', 'What Is Your Preferred Price Range?'];
+  return ['First, Tell Us About Yourself', 'Now Lets Set Up Your Feed'];
 }
 
 function getStepContent(stepIndex) {
@@ -48,11 +50,7 @@ function getStepContent(stepIndex) {
     case 0:
       return <Profile />;
     case 1:
-      return 'What is an ad group anyways?';
-    case 2:
-      return 'This is the bit I really care about!';
-    default:
-      return 'Uknown stepIndex';
+      return <Survey />;
   }
 }
 
@@ -67,7 +65,7 @@ class Home extends Component {
   }
 
   validateAuthentication = () => {
-    if(auth.checkToken()){
+    if(!auth.checkToken()){
       this.props.history.push('/')
     }
   }

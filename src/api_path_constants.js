@@ -1,3 +1,5 @@
+import {auth} from './auth'
+
 let BASE_URL = "http://localhost:3000/";
 
 export const API = {
@@ -6,7 +8,8 @@ export const API = {
         const { path, options } = API[controller][method](...params);
         options.headers = {
             "Content-Type": "application/json; charset=utf-8",
-            // "authentication_token": this.token
+            "X-User-Token": auth.getToken(),
+            "X-User-Email": auth.getUserData() ? auth.getUserData().email : "",
         }
         return fetch(path, options);
     },
@@ -25,12 +28,34 @@ export const API = {
                 body: JSON.stringify({ user: { email, password, password_confirmation }})
             }
         }),
-        questionaire_data: (title, text) => ({
-            path: BASE_URL+'articles',
+        profile: (first_name, last_name, phone, city, country) => ({
+            path: BASE_URL+`api/v1/users/${auth.getUserData().id}`,
             options: {
-                method: 'POST',
-                body: JSON.stringify({title: title, text: text})
+                method: 'PUT',
+                body: JSON.stringify({user:{first_name, last_name, phone, city, country}})
             }
         })
     },
+    surveys: {
+        create_survey: (price_min, price_max, places) => ({
+            path: BASE_URL+`api/v1/surveys`,
+            options: {
+                method: 'POST',
+                body: JSON.stringify({survey: {price_min, price_max, places}})
+            }
+        }),
+        update_survey: (price_min, price_max, places) => ({
+            path: BASE_URL+`api/v1/surveys/${auth.getUserData().id}`,
+            options: {
+                method: 'PUT',
+                body: JSON.stringify({survey: {price_min, price_max, places}})
+            }
+        }),
+        get_survey: () => ({
+            path: BASE_URL+`api/v1/surveys/${auth.getUserData().id}`,
+            options: {
+                method: 'GET',
+            }
+        })
+    }
 }

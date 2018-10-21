@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { API } from '../../api_path_constants'
 import Snackbar from '@material-ui/core/Snackbar';
+import { auth } from '../../auth';
 
 const styles = {
   card: {
@@ -102,10 +103,9 @@ class Landing extends Component {
     if(this.validateForm()){
       API.createRequest('users', 'login')(this.state.email, this.state.password).then(res => 
         res.json()).then(response => {
+          auth.setUserData(response);
           window.localStorage.setItem("authentication_token", response.authentication_token)
-          API.token = response.token
           this.props.history.push('/home')
-          console.log(response)
       })
     } else {
       this.setState({error: "Please enter a valid email", snackOpen: true})

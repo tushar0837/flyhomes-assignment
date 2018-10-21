@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import indexRoutes from './routes';
 // import Home from './containers/home/home';
 import Error from './containers/error/error';
 import Landing from './containers/landing/landing';

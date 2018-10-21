@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './login.css';
 import { API } from '../../api_path_constants'
 import { Button } from '@material-ui/core';
+import { auth } from '../../auth';
 
 class Login extends Component {
   constructor(props){
@@ -41,13 +42,16 @@ class Login extends Component {
       // )
       API.createRequest('users', 'login')(this.state.email, this.state.password).then(res => 
         res.json()).then(response => {
+          auth.setUserData(response);
           window.localStorage.setItem("authentication_token", response.authentication_token).then(
             res => {
               this.props.history.push('/home')
             }
           )
           API.token = response.token
-        })
+          API.user.email = response.email
+          API.user.id = response.id
+         })
     }
   }
   render() {

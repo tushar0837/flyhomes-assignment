@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { API } from '../../api_path_constants'
 import Snackbar from '@material-ui/core/Snackbar';
+import { auth } from '../../auth';
 
 const styles = {
   card: {
@@ -98,13 +99,12 @@ class Signup extends Component {
       API.createRequest('users', 'sign_up')(this.state.email, this.state.password, this.state.password_confirmation).then(res => 
         res.json()).then(response => {
           if(response.errors){
-            this.setState({error: "Email is already taken", open: true})
+            this.setState({error: "Email is already registered", open: true})
             return;
           }
+          auth  .setUserData(response);
           window.localStorage.setItem("authentication_token", response.authentication_token)
-          API.token = response.token
           this.props.history.push('/home')
-          console.log(response)
         })
     }
   }

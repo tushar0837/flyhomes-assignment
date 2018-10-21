@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Grid, TextField, withStyles }  from '@material-ui/core'
 import PropTypes from 'prop-types';
+import { API } from '../../api_path_constants'
+import { auth } from '../../auth';
 
 const styles = {
   container: {
@@ -18,11 +20,11 @@ class Profile extends Component {
   constructor(props){
     super(props)
     this.state = {
-      firstName: "",
-      lastName: "",
-      city: "",
-      country: "",
-      phone: ""
+      firstName: auth.getUserData() ? auth.getUserData().first_name : "",
+      lastName: auth.getUserData() ? auth.getUserData().last_name : "",
+      city: auth.getUserData() ? auth.getUserData().city : "",
+      country: auth.getUserData() ? auth.getUserData().country : "",
+      phone: auth.getUserData() ? auth.getUserData().phone : null
     }
     this.getDataFromServer()
   }
@@ -35,7 +37,7 @@ class Profile extends Component {
   }
   
   updateToServer = () => {
-    console.log(this.state)
+    API.createRequest('users', 'profile')(this.state.firstName, this.state.lastName, this.state.phone, this.state.city, this.state.country)
   }
 
   render() {
