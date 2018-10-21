@@ -1,0 +1,12 @@
+.navbar {
+    background: #77cbdd;
+}
+.navbar .navbar-brand{
+    color: white
+}
+.navbar-default .navbar-text{
+    color: white
+}
+.navbar-default .navbar-link{
+    color: white
+}
