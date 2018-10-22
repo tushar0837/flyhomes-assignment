@@ -15,10 +15,6 @@ import { PrivateRoute } from './components/privateRoute';
 
 
 export default class RouterContainer extends Component {
-  constructor(props){
-    super(props)
-    
-  }
   render() {
     const IndexComponent = auth.checkToken() ? Home : Landing
     return (

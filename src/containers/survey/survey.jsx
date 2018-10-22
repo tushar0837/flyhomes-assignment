@@ -1,78 +1,107 @@
 import React, { Component } from 'react';
-import { Grid, Typography } from '@material-ui/core'
-import ChipInput from 'material-ui-chip-input'
-import { API } from '../../api_path_constants';
 
+import { API } from '../../api_path_constants';
+import SurveyComponent from '../../components/survey'
 
 class Survey extends Component {
     constructor(props){
         super(props)
         this.state = {
-            chips: ["as"],
             priceMin: 0,
-            priceMax: 0
+            priceMax: 0,
+            places: [],
+            properties: [],
+            selectedPlaces:[],
+            placeOptions: [
+                { value: 'seattle', label: 'Seattle' },
+                { value: 'new_york', label: 'New York' },
+                { value: 'boston', label: 'Boston' },
+                { value: 'chicago', label: 'Chicago' },
+                { value: 'san_fracisco', label: 'San Fracisco' },
+                { value: 'portland', label: 'Portland' },
+                { value: 'la', label: 'Los Angles' },
+              ],
+            allTypes: [{name:"home", text: "Home", selected: false},
+            {name: "store_mall_directory", text: "Shop", selected: false},
+            {name: "business", text: "Office", selected: false } ]
         }
     }
-
     componentWillMount(){
-        this.updateData()
+        this.loadData()
     }
-    updateData = () => {
+    loadData = () => {
         API.createRequest("surveys", "get_survey")().then(res => {
             return res.json()
         }).then(response => {
             console.log(response)
-            if(response.message != "success"){
+            if(response.message !== "success"){
                 this.createSurvey()
             } else {
                 this.setState({priceMin: response.survey.price_min, priceMax: response.survey.price_max})
+                this.manageProperties(response.survey.properties)
+                this.managePlaces(response.survey.places)
             }
         })
+    } 
+    managePlaces = (placesFromServer) => {
+        let selectedPlaces = [], places  = []
+        this.state.placeOptions.forEach((place) => {
+            if(placesFromServer.indexOf(place.label) >=0){
+                selectedPlaces.push(place)
+                places.push(place.label)
+            }
+        })
+        this.setState({selectedPlaces, places})
+    }
+    manageProperties = (properties) => {
+        let property = this.state.allTypes.map((type) => {
+            properties.indexOf(type.text) >=0 ? type.selected = true : type.selected = false
+            return type
+        })
+        this.setState({allTypes: property})
+        this.setState({properties})
     }
     createSurvey = () => {
-        API.createRequest("surveys", "create_survey")().then(res => {
-            res.json()
+        API.createRequest("surveys", "create_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties).then(res => {
+            return res.json()
         }).then(response => {
             console.log(response)
         })
     }
-    handleAddChip = (chip) => {
-        let {chips} = this.state
-        chips.push(chip)
-        this.setState({chips}, () => this.updateServer())
-
-    }
     updateServer = () => {
-        API.createRequest("surveys", "update_survey")(100, 2000, this.state.chips).then(res => {
-        res.json()
+        API.createRequest("surveys", "update_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties).then(res => {
+            return res.json()
         }).then(response => {
-        console.log(response)
+            console.log(response)
         })
     }
-    handleDeleteChip = (chip, index) => {
-        let {chips} = this.state
-        chips.splice(index, 1)
-        this.setState({chips})
+
+    handleChange = (placesEvent) => {
+        let places = placesEvent.map(place => place.label)
+        this.setState({places, selectedPlaces: placesEvent}, () => {this.updateServer()})
     }
 
+    selectCard = (index) => {
+        let {allTypes, properties } = this.state
+        properties.indexOf(allTypes[index].text) >=0 ? properties.splice(properties.indexOf(allTypes[index].text), 1) : properties.push(allTypes[index].text)
+        allTypes[index].selected = !allTypes[index].selected
+        this.setState({allTypes, properties}, () => {
+            this.updateServer()
+        })
+    }
     render() {
         return (
-            <Grid container>
-                <Typography> 
-                    Where would you like to live ?
-                </Typography>
-                <ChipInput
-                    fullWidth   
-                    value={this.state.chips}
-                    onAdd={(chip) => this.handleAddChip(chip)}
-                    onDelete={(chip, index) => this.handleDeleteChip(chip, index)}
-                />
-                <Typography>
-                    What type of property are you looking for? {this.state.priceMax}
-                </Typography>
-            </Grid>
+            <SurveyComponent 
+            selectCard={this.selectCard}
+            handleChange={this.handleChange}
+            updateServer={this.updateServer}
+            createSurvey={this.createSurvey}
+            manageProperties={this.manageProperties}
+            loadData={this.loadData}
+            state={this.state}
+            />
+            
         );
   }
 }
-
 export default Survey;
