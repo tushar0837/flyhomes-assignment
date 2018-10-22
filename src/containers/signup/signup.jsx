@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import './signup.css';
-
 import { auth } from '../../auth';
 import { API } from '../../api_path_constants'
 import SignupComponent from '../../components/signup'

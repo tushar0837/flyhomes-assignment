@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import './landing.css';
 import { API } from '../../api_path_constants'
-
 import { auth } from '../../auth';
 import LandingComponent from '../../components/landing'
 
@@ -37,9 +35,13 @@ class Landing extends Component {
     if(this.validateForm()){
       API.createRequest('users', 'login')(this.state.email, this.state.password).then(res => 
         res.json()).then(response => {
-          auth.setUserData(response);
+          if(response.error){
+            this.setState({error: response.error, snackOpen: true})
+          } else {
+            auth.setUserData(response);
           window.localStorage.setItem("authentication_token", response.authentication_token)
-          this.props.history.push('/home')
+          this.props.history.push('/home', {user: response})
+          }
       })
     } else {
       this.setState({snackOpen: true})

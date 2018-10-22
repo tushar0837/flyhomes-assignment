@@ -1,7 +1,6 @@
 import {auth} from './auth'
 
 let BASE_URL = "http://localhost:3000/";
-
 export const API = {
     token: null,
     createRequest: (controller, method) => (...params) => {

@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 
+import Background from '../assets/Beach_House.jpg'
+
 const styles = {
   card: {
     maxWidth: "600px",
@@ -17,18 +19,22 @@ const styles = {
     flexDirection: "row",
     flex: 1,
     padding: "10px",
-    margin: "10px"
+    margin: "10px",
+    marginTop: "75px",
+    border: "2px solid #59a0af",
+    borderRadius: "15px",
+    background: "#e3edef"
   },
   media: {
     height: 140,
   },
   landingContainer:{
     width: "100%",
-    height: "100%",
+    height: "-webkit-fill-available",
     display: "flex",
     alignItem: "center",
     justifyContent: "center",
-    margin: "75px 0%"
+    backgroundImage: `url(${Background})`
   },
   signUp: {
     display: "flex",
