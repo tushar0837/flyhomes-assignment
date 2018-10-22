@@ -10,6 +10,7 @@ import { auth } from './auth'
 import home from './containers/home/home';
 import landing from './containers/landing/landing';
 import signup from './containers/signup/signup';
+import survey from './containers/survey/survey';
 import { PrivateRoute } from './components/privateRoute';
 
 
@@ -25,6 +26,7 @@ export default class RouterContainer extends Component {
             <PrivateRoute path="/home" component={home} />     
             <Route path="/landing" component={landing} />  
             <Route path="/signup" component={signup} />     
+            <PrivateRoute path="/survey" component={survey} />     
             <Route component={Error} />
           </Switch>
           {/* <Footer /> */}

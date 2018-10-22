@@ -12,6 +12,9 @@ class Survey extends Component {
             places: [],
             properties: [],
             selectedPlaces:[],
+            error: "",
+            snackOpen: false,
+            completed: false,
             placeOptions: [
                 { value: 'seattle', label: 'Seattle' },
                 { value: 'new_york', label: 'New York' },
@@ -62,14 +65,14 @@ class Survey extends Component {
         this.setState({properties})
     }
     createSurvey = () => {
-        API.createRequest("surveys", "create_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties).then(res => {
+        API.createRequest("surveys", "create_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties, this.state.completed).then(res => {
             return res.json()
         }).then(response => {
             console.log(response)
         })
     }
     updateServer = () => {
-        API.createRequest("surveys", "update_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties).then(res => {
+        API.createRequest("surveys", "update_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties, this.state.completed).then(res => {
             return res.json()
         }).then(response => {
             console.log(response)
@@ -89,6 +92,23 @@ class Survey extends Component {
             this.updateServer()
         })
     }
+    priceChange = (type, event) => {
+        this.setState({[type]: event.target.value})
+    }
+
+    handleSnackClose = () => {
+        this.setState({ snackOpen: false });
+    };
+    finishSurvey = () => {
+        if(this.state.priceMax && this.state.priceMin && this.state.places.length && this.state.properties.length){
+            this.setState({completed: true}, () => {
+                this.updateServer()
+                this.props.history.push('/')
+            })
+        } else {
+            this.setState({error:"Please fill all the fields", snackOpen: true})
+        }
+    }
     render() {
         return (
             <SurveyComponent 
@@ -98,7 +118,10 @@ class Survey extends Component {
             createSurvey={this.createSurvey}
             manageProperties={this.manageProperties}
             loadData={this.loadData}
+            priceChange={this.priceChange}
             state={this.state}
+            handleSnackClose={this.handleSnackClose}
+            finishSurvey={this.finishSurvey}
             />
             
         );

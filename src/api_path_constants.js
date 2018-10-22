@@ -36,18 +36,18 @@ export const API = {
         })
     },
     surveys: {
-        create_survey: (price_min, price_max, places, properties) => ({
+        create_survey: (price_min, price_max, places, properties, completed) => ({
             path: BASE_URL+`api/v1/surveys`,
             options: {
                 method: 'POST',
-                body: JSON.stringify({survey: {price_min, price_max, places, properties}})
+                body: JSON.stringify({survey: {price_min, price_max, places, properties, completed}})
             }
         }),
-        update_survey: (price_min, price_max, places, properties) => ({
+        update_survey: (price_min, price_max, places, properties, completed) => ({
             path: BASE_URL+`api/v1/surveys/${auth.getUserData().id}`,
             options: {
                 method: 'PUT',
-                body: JSON.stringify({survey: {price_min, price_max, places, properties}})
+                body: JSON.stringify({survey: {price_min, price_max, places, properties, completed}})
             }
         }),
         get_survey: () => ({

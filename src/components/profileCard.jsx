@@ -36,7 +36,7 @@ const styles = {
         textAlign:"center"
     },  
     icon: {
-        fontSize: '70px'
+        fontSize: '3.5em'
     }
 }
 

@@ -61,8 +61,7 @@ const styles = {
     padding: "20px"
   },
   textField:{
-    width:"80%",
-    marginLeft: "10%"
+    textAlign: "center"
   },
   rememberMe:{
     marginLeft: "10%"
@@ -78,9 +77,6 @@ const styles = {
     borderLeft: "1px solid #000",
     borderWidth: "0 0 0 1px",
   },
-  textField: {
-    textAlign: "center"
-  }
 };
 
 class LandingComponent extends Component {
