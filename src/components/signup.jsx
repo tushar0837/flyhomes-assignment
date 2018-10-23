@@ -132,6 +132,7 @@ class SignupComponent extends Component {
           </div>
         </Card>
         <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
           open={this.props.snackOpen}
           autoHideDuration={4000}
           ContentProps={{

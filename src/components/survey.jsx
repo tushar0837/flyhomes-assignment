@@ -157,6 +157,7 @@ class SurveyComponent extends Component {
                     </Grid>
                 </Card>
                 <Snackbar
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
                     open={this.props.snackOpen}
                     className={classes.snackbar}
                     onClose={this.props.handleSnackClose}

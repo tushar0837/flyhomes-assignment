@@ -127,6 +127,7 @@ class LandingComponent extends Component {
         </Grid>
         </Card>
         <Snackbar
+          anchorOrigin={{vertical: "top", horizontal: "center"}}
           open={this.props.snackOpen}
           onClose={this.props.handleSnackClose}
           autoHideDuration={3000}
