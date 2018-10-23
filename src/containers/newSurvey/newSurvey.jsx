@@ -65,7 +65,7 @@ class Survey extends Component {
 
     //handles price change
     priceChange = (type, event) => {
-        this.setState({[type]: event.target.value.replace(/^0+/, '') || "0"}, () => {
+        this.setState({ [type]: event.target.value.replace(/^0+/, '') || "0" }, () => {
             this.updateServer()
         })
     }
@@ -94,9 +94,19 @@ class Survey extends Component {
                 selectCard={this.selectCard}
                 handleChange={this.handleChange}
                 priceChange={this.priceChange}
-                state={this.state}
                 handleSnackClose={this.handleSnackClose}
                 finishSurvey={this.finishSurvey}
+                priceMin={this.state.priceMin}
+                priceMax={this.state.priceMax}
+                places={this.state.places}
+                properties={this.state.properties}
+                selectedPlaces={this.state.selectedPlaces}
+                error={this.state.error}
+                snackOpen={this.state.snackOpen}
+                completed={this.state.completed}
+                surveyId={this.state.surveyId}
+                placeOptions={this.state.placeOptions}
+                allTypes={this.state.allTypes}
             />
 
         );

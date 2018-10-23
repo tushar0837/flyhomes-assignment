@@ -34,7 +34,7 @@ class ProfileComponent extends Component {
           }}
           label="First Name"
           type="name"
-          value={this.props.state.firstName}
+          value={this.props.firstName}
           className={classes.textField}
           onChange={(event) => this.props.handleChange('firstName', event)}
           margin="normal"
@@ -48,7 +48,7 @@ class ProfileComponent extends Component {
           }}
           label="Last Name"
           type="name"
-          value={this.props.state.lastName}
+          value={this.props.lastName}
           className={classes.textField}
           onChange={(event) => this.props.handleChange('lastName', event)}
           margin="normal"
@@ -62,7 +62,7 @@ class ProfileComponent extends Component {
           }}
           label="Phone"
           type="number"
-          value={this.props.state.phone}
+          value={this.props.phone}
           className={classes.textField}
           onChange={(event) => this.props.handleChange('phone', event)}
           margin="normal"
@@ -76,7 +76,7 @@ class ProfileComponent extends Component {
           }}
           label="City"
           type="name"
-          value={this.props.state.city}
+          value={this.props.city}
           className={classes.textField}
           onChange={(event) => this.props.handleChange('city', event)}
           margin="normal"
@@ -90,7 +90,7 @@ class ProfileComponent extends Component {
           }}
           label="Country"
           type="name"
-          value={this.props.state.country}
+          value={this.props.country}
           className={classes.textField}
           onChange={(event) => this.props.handleChange('country', event)}
           margin="normal"

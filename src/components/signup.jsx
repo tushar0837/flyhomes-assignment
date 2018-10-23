@@ -100,7 +100,7 @@ class SignupComponent extends Component {
                 label="Email"
                 type="email"
                 className={classes.textField}
-                value={this.props.state.name}
+                value={this.props.name}
                 onChange={(event) => this.props.handleChange('email', event)}
                 margin="normal"
               />
@@ -108,7 +108,7 @@ class SignupComponent extends Component {
                 id="password"
                 label="Password"
                 type="password"
-                defaultValue={this.props.state.password}
+                defaultValue={this.props.password}
                 className={classes.textField}
                 onChange={(event) => this.props.handleChange('password', event)}
                 margin="normal"
@@ -117,7 +117,7 @@ class SignupComponent extends Component {
                 id="c-password"
                 label="Confirm Password"
                 type="password"
-                defaultValue={this.props.state.password_confirmation}
+                defaultValue={this.props.password_confirmation}
                 className={classes.textField}
                 onChange={(event) => this.props.handleChange('password_confirmation', event)}
                 margin="normal"
@@ -132,12 +132,12 @@ class SignupComponent extends Component {
           </div>
         </Card>
         <Snackbar
-          open={this.props.state.snackOpen}
+          open={this.props.snackOpen}
           autoHideDuration={4000}
           ContentProps={{
             'aria-describedby': 'message-id',
           }}
-          message={<span id="message-id">{this.props.state.error}</span>}
+          message={<span id="message-id">{this.props.error}</span>}
         />
       </div>
     );

@@ -131,6 +131,17 @@ class SurveyList extends Component {
                 state={this.state}
                 handleSnackClose={this.handleSnackClose}
                 finishSurvey={this.finishSurvey}
+                priceMin={this.state.priceMin}
+                priceMax={this.state.priceMax}
+                places={this.state.places}
+                properties={this.state.properties}
+                selectedPlaces={this.state.selectedPlaces}
+                error={this.state.error}
+                snackOpen={this.state.snackOpen}
+                completed={this.state.completed}
+                surveyId={this.state.surveyId}
+                placeOptions={this.state.placeOptions}
+                allTypes={this.state.allTypes}
             />
 
         );

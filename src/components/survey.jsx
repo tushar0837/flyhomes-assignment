@@ -107,25 +107,25 @@ class SurveyComponent extends Component {
                 </Typography>
                         <Select
                             className={classes.selectBox}
-                            value={this.props.state.selectedPlaces}
+                            value={this.props.selectedPlaces}
                             onChange={this.props.handleChange}
-                            options={this.props.state.placeOptions}
+                            options={this.props.placeOptions}
                             isMulti={true}
                         />
-                        {this.props.state.places.length > 0 || this.props.state.properties.length > 0 ?
+                        {this.props.places.length > 0 || this.props.properties.length > 0 ?
                             <React.Fragment>
                                 <Typography variant="h5">
                                     What type of property are you looking for?
                     </Typography>
                                 <div className={classes.cardContainer1}>
-                                    {this.props.state.allTypes.map((type, index) => {
+                                    {this.props.allTypes.map((type, index) => {
                                         return <ProfileCard key={index} selectCard={this.props.selectCard} index={index} name={type.name} text={type.text} selected={type.selected} />
                                     })}
                                 </div>
                             </React.Fragment>
                             : null}
 
-                        {this.props.state.properties.length > 0 ?
+                        {this.props.properties.length > 0 ?
                             <React.Fragment>
                                 <Typography variant="h5">
                                     What Is Your Preferred Price Range?
@@ -135,7 +135,7 @@ class SurveyComponent extends Component {
                                         id="priceMin"
                                         label="Price Min"
                                         type="number"
-                                        value={this.props.state.priceMin}
+                                        value={this.props.priceMin}
                                         className={classes.textField}
                                         onChange={(event) => this.props.priceChange('priceMin', event)}
                                         margin="normal"
@@ -144,7 +144,7 @@ class SurveyComponent extends Component {
                                         id="priceMax"
                                         label="Price Max"
                                         type="number"
-                                        value={this.props.state.priceMax}
+                                        value={this.props.priceMax}
                                         className={classes.textField}
                                         onChange={(event) => this.props.priceChange('priceMax', event)}
                                         margin="normal"
@@ -157,14 +157,14 @@ class SurveyComponent extends Component {
                     </Grid>
                 </Card>
                 <Snackbar
-                    open={this.props.state.snackOpen}
+                    open={this.props.snackOpen}
                     className={classes.snackbar}
                     onClose={this.props.handleSnackClose}
                     autoHideDuration={3000}
                     ContentProps={{
                         'aria-describedby': 'message-id',
                     }}
-                    message={<span id="message-id">{this.props.state.error}</span>}
+                    message={<span id="message-id">{this.props.error}</span>}
                 />
             </div>
         );

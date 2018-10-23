@@ -25,7 +25,7 @@ class Profile extends Component {
         auth.setUserData(response.user)
       })
   }
-  
+
   componentWillMount() {
     this.updateToServer = debounce(400, this.updateToServer);
   }
@@ -40,8 +40,11 @@ class Profile extends Component {
       <ProfileComponent
         updateToServer={this.updateToServer}
         handleChange={this.handleChange}
-        state={this.state}
-        props={this.props}
+        firstName={this.state.firstName}
+        lastName={this.state.lastName}
+        city={this.state.city}
+        country={this.state.country}
+        phone={this.state.phone}
       />
     );
   }

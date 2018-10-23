@@ -59,12 +59,15 @@ class Landing extends Component {
   render() {
     return (
       <LandingComponent
-        handleClose={this.handleSnackClose}
+        handleSnackClose={this.handleSnackClose}
         login={this.login}
         validateForm={this.validateForm}
         handleTextChange={this.handleTextChange}
-        state={this.state}
-        prop={this.props}
+        email= {this.state.email}
+        password={this.state.password}
+        remember_me={this.state.remember_me}
+        error={this.state.error}
+        snackOpen={this.state.snackOpen}
       />
     );
   }

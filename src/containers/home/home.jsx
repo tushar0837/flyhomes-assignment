@@ -7,9 +7,6 @@ import HomeComponent from '../../components/home'
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      activeStep: 0,
-    };
     this.validateAuthentication();
   }
 
@@ -24,8 +21,6 @@ class Home extends Component {
     return (
       <HomeComponent
         validateAuthentication={this.validateAuthentication}
-        state={this.state}
-        props={this.props}
       />
     );
   }

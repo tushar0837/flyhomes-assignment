@@ -57,7 +57,11 @@ class Signup extends Component {
         signup={this.signup}
         validateForm={this.validateForm}
         handleChange={this.handleChange}
-        state={this.state}
+        email={this.state.email}
+        password={this.state.password}
+        password_confirmation={this.state.password_confirmation}
+        snackOpen={this.state.snackOpen}
+        error={this.state.error}
       />
     );
   }

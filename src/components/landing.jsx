@@ -106,7 +106,7 @@ class LandingComponent extends Component {
                 label="Email"
                 type="email"
                 className={classes.textField}
-                value={this.props.state.email}
+                value={this.props.email}
                 onChange={(event) => this.props.handleTextChange('email', event)}
                 margin="normal"
               />
@@ -114,7 +114,7 @@ class LandingComponent extends Component {
                 id="password"
                 label="Password"
                 type="password"
-                defaultValue={this.props.state.password}
+                defaultValue={this.props.password}
                 className={classes.textField}
                 onChange={(event) => this.props.handleTextChange('password', event)}
                 margin="normal"
@@ -127,13 +127,13 @@ class LandingComponent extends Component {
         </Grid>
         </Card>
         <Snackbar
-          open={this.props.state.snackOpen}
+          open={this.props.snackOpen}
           onClose={this.props.handleSnackClose}
           autoHideDuration={3000}
           ContentProps={{
             'aria-describedby': 'message-id',
           }}
-          message={<span id="message-id">{this.props.state.error}</span>}
+          message={<span id="message-id">{this.props.error}</span>}
         />
       </div>
     );
