@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { debounce } from 'throttle-debounce';
 
+import { debounce } from 'throttle-debounce';
 import { API } from '../../api_path_constants'
 import { auth } from '../../auth';
 import ProfileComponent from '../../components/profile'

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
+
 import { Navbar } from 'react-bootstrap';
 import { Button, withStyles } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'

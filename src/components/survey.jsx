@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import Card from '@material-ui/core/Card';
 import Background from '../assets/Beach_House.jpg'
-
 import { Grid, Typography, withStyles, TextField, Button } from '@material-ui/core'
 import Select from 'react-select';
 import Snackbar from '@material-ui/core/Snackbar';

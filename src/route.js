@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import Home from './containers/home/home';
 import Error from './components/error';
 import Landing from './containers/landing/landing';
 import Home from './containers/home/home';
@@ -10,9 +9,9 @@ import { auth } from './auth'
 import home from './containers/home/home';
 import landing from './containers/landing/landing';
 import signup from './containers/signup/signup';
-import survey from './containers/survey/survey';
+import survey from './containers/newSurvey/newSurvey';
 import { PrivateRoute } from './components/privateRoute';
-import surveyList from './containers/survey_list/surveyList';
+import surveyList from './containers/surveyList/surveyList';
 import viewSurvey from './containers/viewSurvey/viewSurvey';
 
 
