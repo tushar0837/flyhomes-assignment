@@ -102,7 +102,7 @@ class SurveyListComponent extends Component {
                                     {survey.created_at.slice(0, 10)}
                                 </div>
                                 <div className={classes.item2} xs={4}>
-                                    {survey.completed ? "Completed" : "Not Completed"}
+                                    {survey.completed ? "Completed" : "In Progress"}
                                 </div>
                                 <div className={classes.item2} xs={4}>
                                     <Button onClick={() => this.props.viewSurvey(index)} className={classes.surveyBtn} variant="outlined"> View Survey</Button>

@@ -18,6 +18,7 @@ class Profile extends Component {
     }
   }
 
+  //updates the user data on server
   updateToServer = () => {
     API.createRequest('users', 'profile')(this.state.firstName, this.state.lastName, this.state.phone, this.state.city, this.state.country).then((res) =>
       res.json()).then((response) => {
@@ -29,6 +30,7 @@ class Profile extends Component {
     this.updateToServer = debounce(400, this.updateToServer);
   }
 
+  //hanldes text fields change
   handleChange = (type, event) => {
     this.setState({ [type]: event.target.value }, () => this.updateToServer())
   }

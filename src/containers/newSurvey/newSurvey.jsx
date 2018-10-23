@@ -31,6 +31,7 @@ class Survey extends Component {
         }
         this.createSurvey()
     }
+    //creates a new survey
     createSurvey = () => {
         API.createRequest("surveys", "create_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties, this.state.completed).then(res => {
             return res.json()
@@ -38,6 +39,7 @@ class Survey extends Component {
             this.setState({ surveyId: response.survey.id })
         })
     }
+    //updates the current survey
     updateServer = () => {
         API.createRequest("surveys", "update_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties, this.state.completed, this.state.surveyId).then(res => {
             return res.json()
@@ -45,11 +47,13 @@ class Survey extends Component {
         })
     }
 
+    //handle places data change
     handleChange = (placesEvent) => {
         let places = placesEvent.map(place => place.label)
         this.setState({ places, selectedPlaces: placesEvent }, () => { this.updateServer() })
     }
 
+    //handles click on cards
     selectCard = (index) => {
         let { allTypes, properties } = this.state
         properties.indexOf(allTypes[index].text) >= 0 ? properties.splice(properties.indexOf(allTypes[index].text), 1) : properties.push(allTypes[index].text)
@@ -58,15 +62,20 @@ class Survey extends Component {
             this.updateServer()
         })
     }
+
+    //handles price change
     priceChange = (type, event) => {
         this.setState({[type]: event.target.value.replace(/^0+/, '') || "0"}, () => {
             this.updateServer()
         })
     }
 
+    //closes the snackbar
     handleSnackClose = () => {
         this.setState({ snackOpen: false });
     };
+
+    //finishes the survey and validates the form  
     finishSurvey = () => {
         if (this.state.priceMax && this.state.priceMin >= 0 && this.state.places.length && this.state.properties.length && this.state.priceMax > this.state.priceMin) {
             this.setState({ completed: true }, () => {

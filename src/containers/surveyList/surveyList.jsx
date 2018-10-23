@@ -13,6 +13,7 @@ class SurveyList extends Component {
         this.loadData()
     }
 
+    //gets the survey list from server
     loadData = () => {
         API.createRequest("surveys", "get_survey")().then(res => {
             return res.json()
@@ -22,6 +23,8 @@ class SurveyList extends Component {
             }
         })
     }
+
+    //navigates the user to selected survey
     viewSurvey = (index) => {
         this.props.history.push(`/surveyList/${this.state.surveys[index].id}`)
     }

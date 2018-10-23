@@ -13,36 +13,17 @@ class Home extends Component {
     this.validateAuthentication();
   }
 
+  //validate the token otherwise push to the landing page 
   validateAuthentication = () => {
     if (!auth.checkToken()) {
       this.props.history.push('/')
     }
   }
 
-  handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1,
-    }));
-  };
-
-  handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1,
-    }));
-  };
-
-  handleReset = () => {
-    this.setState({
-      activeStep: 0,
-    });
-  };
   render() {
     return (
       <HomeComponent
         validateAuthentication={this.validateAuthentication}
-        handleNext={this.handleNext}
-        handleBack={this.handleBack}
-        handleReset={this.handleReset}
         state={this.state}
         props={this.props}
       />

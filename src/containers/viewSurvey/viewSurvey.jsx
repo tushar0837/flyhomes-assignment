@@ -32,6 +32,7 @@ class SurveyList extends Component {
         this.loadData()
     }
 
+    //loads the survey data of selected id
     loadData = () => {
         API.createRequest("surveys", "get_survey")().then(res => {
             return res.json()
@@ -50,6 +51,7 @@ class SurveyList extends Component {
         })
     }
 
+    //manages the places data from server to array
     managePlaces = (placesFromServer) => {
         let selectedPlaces = [], places = []
         this.state.placeOptions.forEach((place) => {
@@ -60,6 +62,8 @@ class SurveyList extends Component {
         })
         this.setState({ selectedPlaces, places })
     }
+
+    //manages the properties data from server to array
     manageProperties = (properties) => {
         let property = this.state.allTypes.map((type) => {
             properties.indexOf(type.text) >= 0 ? type.selected = true : type.selected = false
@@ -69,6 +73,7 @@ class SurveyList extends Component {
         this.setState({ properties })
     }
 
+    //updates the server with latest data
     updateServer = () => {
         API.createRequest("surveys", "update_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties, this.state.completed, this.state.surveyId).then(res => {
             return res.json()
@@ -76,11 +81,13 @@ class SurveyList extends Component {
         })
     }
 
+    //hanldes the change in selected places
     handleChange = (placesEvent) => {
         let places = placesEvent.map(place => place.label)
         this.setState({ places, selectedPlaces: placesEvent }, () => { this.updateServer() })
     }
 
+    //handles the change in selected cards of properties
     selectCard = (index) => {
         let { allTypes, properties } = this.state
         properties.indexOf(allTypes[index].text) >= 0 ? properties.splice(properties.indexOf(allTypes[index].text), 1) : properties.push(allTypes[index].text)
@@ -89,15 +96,20 @@ class SurveyList extends Component {
             this.updateServer()
         })
     }
+
+    //handles change in price
     priceChange = (type, event) => {
         this.setState({ [type]: event.target.value.replace(/^0+/, '') || "0" }, () => {
             this.updateServer()
         })
     }
 
+    //closes the navbar
     handleSnackClose = () => {
         this.setState({ snackOpen: false });
     };
+
+    //finishes the survey with latest data, marking completed as true
     finishSurvey = () => {
         if (this.state.priceMax && this.state.priceMin >= 0 && this.state.places.length && this.state.properties.length && this.state.priceMax > this.state.priceMin) {
             this.setState({ completed: true }, () => {

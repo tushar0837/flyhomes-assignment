@@ -15,9 +15,12 @@ class Signup extends Component {
       error: ""
     }
   }
+  //hanldes change in text fields
   handleChange = (type, event) => {
     this.setState({ [type]: event.target.value })
   }
+
+  //validates the signup form and signup
   validateForm = () => {
     let emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailPattern.test(String(this.state.email).toLowerCase())) {

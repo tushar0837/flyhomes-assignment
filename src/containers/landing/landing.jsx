@@ -17,9 +17,11 @@ class Landing extends Component {
     }
   }
 
-  handleChange = (type, event) => {
+  //hanldes the value changes in text fields
+  handleTextChange = (type, event) => {
     this.setState({ [type]: event.target.value })
   }
+  //validates the data in text fields
   validateForm = () => {
     let emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!emailPattern.test(String(this.state.email).toLowerCase())) {
@@ -31,6 +33,7 @@ class Landing extends Component {
     }
     return true
   }
+  //hits login api and give error if credentials are wrond
   login = () => {
     if (this.validateForm()) {
       API.createRequest('users', 'login')(this.state.email, this.state.password).then(res =>
@@ -48,17 +51,18 @@ class Landing extends Component {
     }
   }
 
-  handleClose = () => {
+  //closes the snackbar
+  handleSnackClose = () => {
     this.setState({ snackOpen: false });
   };
 
   render() {
     return (
       <LandingComponent
-        handleClose={this.handleClose}
+        handleClose={this.handleSnackClose}
         login={this.login}
         validateForm={this.validateForm}
-        handleChange={this.handleChange}
+        handleTextChange={this.handleTextChange}
         state={this.state}
         prop={this.props}
       />
