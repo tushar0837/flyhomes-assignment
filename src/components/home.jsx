@@ -18,7 +18,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit,
   },
-  card:{
+  card: {
     maxWidth: "500px",
     display: "flex",
     height: "38em",
@@ -33,7 +33,7 @@ const styles = theme => ({
     justifyContent: "center",
     flexDirection: "column",
   },
-  cardContainer:{
+  cardContainer: {
     width: "100%",
     height: "-webkit-fill-available",
     display: "flex",
@@ -46,7 +46,12 @@ const styles = theme => ({
     padding: "10px"
   },
   surveyBtn: {
-    marginTop: "10px"
+    marginTop: "10px",
+    margin: "0 10px"
+  },
+  btns: {
+    display: "flex",
+    flexDirection: "row"
   }
 });
 
@@ -56,14 +61,17 @@ class HomeComponent extends Component {
     return (
       <div className={classes.cardContainer}>
         <Card className={classes.card}>
-        <Typography className={classes.textFields} variant="h4">
-            Welcome Back! 
+          <Typography className={classes.textFields} variant="h4">
+            Welcome to FlyHomes!
         </Typography>
-        <Typography className={classes.textFields} variant="h5">
-            Please update your details from here
+          <Typography className={classes.textFields} variant="h5">
+            Please update your details here
         </Typography>
-            <Profile />
-          <Button href="/survey" className={classes.surveyBtn} variant="outlined"> Take a Survey</Button>
+          <Profile />
+          <div className={classes.btns}>
+            <Button href="/survey" className={classes.surveyBtn} variant="outlined"> Take a Survey</Button>
+            <Button href="/surveyList" className={classes.surveyBtn} variant="outlined"> View Survey List</Button>
+          </div>
         </Card>
       </div>
     );

@@ -9,7 +9,7 @@ import Select from 'react-select';
 import Snackbar from '@material-ui/core/Snackbar';
 
 
-import  ProfileCard  from './profileCard';
+import ProfileCard from './profileCard';
 
 
 const styles = theme => ({
@@ -20,7 +20,7 @@ const styles = theme => ({
     container: {
         display: "flex",
         flexDirection: 'column'
-    },  
+    },
     cardContainer1: {
         display: "flex",
         flexDirection: "row",
@@ -28,15 +28,15 @@ const styles = theme => ({
     },
     root: {
         width: '100%',
-      },
-      backButton: {
+    },
+    backButton: {
         marginRight: theme.spacing.unit,
-      },
-      instructions: {
+    },
+    instructions: {
         marginTop: theme.spacing.unit,
         marginBottom: theme.spacing.unit,
-      },
-      card:{
+    },
+    card: {
         maxWidth: "500px",
         display: "flex",
         height: "44em",
@@ -50,41 +50,45 @@ const styles = theme => ({
         alignItems: " center",
         justifyContent: "flex-start",
         flexDirection: "column",
-      },
-      cardContainer:{
+    },
+    cardContainer: {
         width: "100%",
         height: "-webkit-fill-available",
         display: "flex",
         alignItem: "center",
         justifyContent: "center",
         backgroundImage: `url(${Background})`,
-      },
-      textFields: {
+    },
+    textFields: {
         textAlign: "center",
         padding: "10px"
-      },
-      surveyBtn: {
+    },
+    surveyBtn: {
         background: "#d1f4fc",
         marginTop: "10px"
-      },
-      fieldContainer: {
-          display: "flex",
-          flex: 1,
-          alignItem: "center",
-          justifyContent: "center",
-          flexDirection: "row"
-      },
-      textField: {
-          flex: 0.5,
-          margin: "2%",
-          height: "3.2em"
-      },
-      finishBtn: {
-          width: "50%",
-          marginLeft: "25%",
-          marginTop: "3%"
-      }
+    },
+    fieldContainer: {
+        display: "flex",
+        flex: 1,
+        alignItem: "center",
+        justifyContent: "center",
+        flexDirection: "row"
+    },
+    textField: {
+        flex: 0.5,
+        margin: "2%",
+        height: "3.2em"
+    },
+    finishBtn: {
+        width: "50%",
+        marginLeft: "25%",
+        marginTop: "3%"
+    },
+    snackbar: {
+        fontSize: 15
+    }
 })
+
 
 class SurveyComponent extends Component {
     render() {
@@ -92,82 +96,83 @@ class SurveyComponent extends Component {
         return (
             <div className={classes.cardContainer}>
                 <Card className={classes.card}>
-                <Typography className={classes.textFields} variant="h4">
-                    Survey
+                    <Typography className={classes.textFields} variant="h4">
+                        Survey
                 </Typography>
-                <Typography className={classes.textFields} variant="h5">
-                    Please answer below questions to setup your feed
+                    <Typography className={classes.textFields} variant="h5">
+                        Please answer below questions to setup your feed
                 </Typography>
-                <Grid container className={classes.container}>
-                <Typography variant="h5"> 
-                    Where would you like to live ?
+                    <Grid container className={classes.container}>
+                        <Typography variant="h5">
+                            Where would you like to live ?
                 </Typography>
-                <Select
-                    className={classes.selectBox}
-                    value={this.props.state.selectedPlaces}
-                    onChange={this.props.handleChange}
-                    options={this.props.state.placeOptions}
-                    isMulti={true}
-                />
-                {this.props.state.places.length > 0 || this.props.state.properties.length > 0 ?
-                <React.Fragment>
-                    <Typography variant="h5">
-                        What type of property are you looking for? 
+                        <Select
+                            className={classes.selectBox}
+                            value={this.props.state.selectedPlaces}
+                            onChange={this.props.handleChange}
+                            options={this.props.state.placeOptions}
+                            isMulti={true}
+                        />
+                        {this.props.state.places.length > 0 || this.props.state.properties.length > 0 ?
+                            <React.Fragment>
+                                <Typography variant="h5">
+                                    What type of property are you looking for?
                     </Typography>
-                        <div className={classes.cardContainer1}> 
-                        {this.props.state.allTypes.map((type, index) => {
-                            return <ProfileCard key={index} selectCard={this.props.selectCard} index={index} name={type.name} text={type.text} selected={type.selected} />
-                        })}
-                    </div>
-                </React.Fragment>
-                : null}
+                                <div className={classes.cardContainer1}>
+                                    {this.props.state.allTypes.map((type, index) => {
+                                        return <ProfileCard key={index} selectCard={this.props.selectCard} index={index} name={type.name} text={type.text} selected={type.selected} />
+                                    })}
+                                </div>
+                            </React.Fragment>
+                            : null}
 
-                {this.props.state.properties.length > 0 ?
-                <React.Fragment>
-                    <Typography variant="h5"> 
-                        What Is Your Preferred Price Range?
+                        {this.props.state.properties.length > 0 ?
+                            <React.Fragment>
+                                <Typography variant="h5">
+                                    What Is Your Preferred Price Range?
                     </Typography>
-                    <div className={classes.fieldContainer}>                    
-                        <TextField
-                            id="priceMin"
-                            label="Price Min"
-                            type="number"
-                            value={this.props.state.priceMin}
-                            className={classes.textField}
-                            onChange={(event) => this.props.priceChange('priceMin', event)}
-                            margin="normal"
-                        />
-                        <TextField
-                            id="priceMax"
-                            label="Price Max"
-                            type="number"
-                            value={this.props.state.priceMax}
-                            className={classes.textField}
-                            onChange={(event) => this.props.priceChange('priceMax', event)}
-                            margin="normal"
-                        />
-                    </div>
-                    </React.Fragment>
-                    : null
-                }
-                    <Button onClick={() => {this.props.finishSurvey()}} className={classes.finishBtn} variant="outlined"> Finish </Button>
-                </Grid>
+                                <div className={classes.fieldContainer}>
+                                    <TextField
+                                        id="priceMin"
+                                        label="Price Min"
+                                        type="number"
+                                        value={this.props.state.priceMin}
+                                        className={classes.textField}
+                                        onChange={(event) => this.props.priceChange('priceMin', event)}
+                                        margin="normal"
+                                    />
+                                    <TextField
+                                        id="priceMax"
+                                        label="Price Max"
+                                        type="number"
+                                        value={this.props.state.priceMax}
+                                        className={classes.textField}
+                                        onChange={(event) => this.props.priceChange('priceMax', event)}
+                                        margin="normal"
+                                    />
+                                </div>
+                            </React.Fragment>
+                            : null
+                        }
+                        <Button onClick={() => { this.props.finishSurvey() }} className={classes.finishBtn} variant="outlined"> Finish </Button>
+                    </Grid>
                 </Card>
                 <Snackbar
                     open={this.props.state.snackOpen}
+                    className={classes.snackbar}
                     onClose={this.props.handleSnackClose}
                     autoHideDuration={3000}
                     ContentProps={{
                         'aria-describedby': 'message-id',
                     }}
                     message={<span id="message-id">{this.props.state.error}</span>}
-                    />
+                />
             </div>
         );
-  }
+    }
 }
 SurveyComponent.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
-  
+};
+
 export default withStyles(styles)(SurveyComponent);

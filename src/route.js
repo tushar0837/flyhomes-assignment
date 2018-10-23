@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import Home from './containers/home/home';
-import Error from './containers/error/error';
+import Error from './components/error';
 import Landing from './containers/landing/landing';
 import Home from './containers/home/home';
 import NavbarContainer from './containers/navbar/navbar';
@@ -12,6 +12,8 @@ import landing from './containers/landing/landing';
 import signup from './containers/signup/signup';
 import survey from './containers/survey/survey';
 import { PrivateRoute } from './components/privateRoute';
+import surveyList from './containers/survey_list/surveyList';
+import viewSurvey from './containers/viewSurvey/viewSurvey';
 
 
 export default class RouterContainer extends Component {
@@ -27,6 +29,8 @@ export default class RouterContainer extends Component {
             <Route path="/landing" component={landing} />  
             <Route path="/signup" component={signup} />     
             <PrivateRoute path="/survey" component={survey} />     
+            <PrivateRoute exact path="/surveyList" component={surveyList} />     
+            <PrivateRoute exact path="/surveyList/:id" component={viewSurvey} />     
             <Route component={Error} />
           </Switch>
           {/* <Footer /> */}

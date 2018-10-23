@@ -1,27 +1,40 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {Navbar} from 'react-bootstrap';
-import { Button } from '@material-ui/core'
-import {withRouter} from 'react-router-dom'
+import PropTypes from 'prop-types';
+import { Navbar } from 'react-bootstrap';
+import { Button, withStyles } from '@material-ui/core'
+import { withRouter } from 'react-router-dom'
 
-import {auth} from '../auth'
+import { auth } from '../auth'
 
-class NavbarComponent extends Component{
-    render(){
-        return(
-            <Navbar fixedTop>
+const styles = {
+    mainNav:{
+        background: "rgba(0,0,0,0.25)",
+    },
+    text: {
+        color: "white!important",
+    }
+
+}
+
+class NavbarComponent extends Component {
+    render() {
+    const { classes } = this.props;
+        return (
+            <Navbar className={classes.mainNav} fixedTop>
                 <Navbar.Header>
                     <Navbar.Brand>
-                    <a href="/">FLYHOMES</a>
+                        <a className={classes.text} href="/">FLYHOMES</a>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                    <Navbar.Text>
-                    { auth.getUserData() ? this.props.renderUser() : null}
+                    <Navbar.Text className={classes.text}>
+                        {auth.getUserData().first_name ? `Signed in as: ${auth.getUserData().first_name }` : null}
                     </Navbar.Text>
-                    {auth.checkToken() ?<Navbar.Form pullRight>
-                         <Button variant="outlined" onClick={this.props.logout} >Logout</Button> 
+                    {auth.checkToken() ?
+                    <Navbar.Form pullRight>
+                        <Button className={classes.text} variant="outlined" onClick={this.props.logout} >Logout</Button>
                     </Navbar.Form> : null}
                 </Navbar.Collapse>
             </Navbar>
@@ -29,4 +42,8 @@ class NavbarComponent extends Component{
     }
 }
 
-export default withRouter(NavbarComponent)
+NavbarComponent.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+  
+export default withStyles(styles)(withRouter(NavbarComponent));

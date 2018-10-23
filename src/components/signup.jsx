@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-  
+
 import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -28,7 +28,7 @@ const styles = {
   media: {
     height: 140,
   },
-  landingContainer:{
+  landingContainer: {
     width: "100%",
     height: "-webkit-fill-available",
     display: "flex",
@@ -42,7 +42,7 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-  }, 
+  },
   login: {
     display: "flex",
     flex: 1,
@@ -50,30 +50,30 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
   },
-  signUpButton:{
+  signUpButton: {
     marginTop: "15px"
   },
-  container:{
+  container: {
     width: "100%",
-    height: "65%",  
-    justifyContent:"center",
-    alignItem:"center",
-    display:"flex",
+    height: "65%",
+    justifyContent: "center",
+    alignItem: "center",
+    display: "flex",
     flexDirection: "column"
   },
-  textField:{
-    width:"80%",
+  textField: {
+    width: "80%",
     marginLeft: "10%"
   },
-  rememberMe:{
+  rememberMe: {
     marginLeft: "10%"
   },
-  signupButton:{
+  signupButton: {
     width: "60%",
     marginLeft: "20%",
     marginTop: "20px"
   },
-  divider:{
+  divider: {
     top: "20px",
     width: "1px",
     height: "100%",
@@ -90,43 +90,43 @@ class SignupComponent extends Component {
     return (
       <div className={classes.landingContainer}>
         <Card className={classes.card}>
-          <div className={classes.login}> 
+          <div className={classes.login}>
             <Typography variant="h4" gutterBottom>
               Create a new Account
             </Typography>
             <form className={classes.container} noValidate autoComplete="off">
-                <TextField
-                  id="email"
-                  label="Email"
-                  type="email"
-                  className={classes.textField}
-                  value={this.props.state.name}
-                  onChange={(event) => this.props.handleChange('email', event)}
-                  margin="normal"
-                />
-                <TextField
-                  id="password"
-                  label="Password"
-                  type="password"
-                  defaultValue={this.props.state.password}
-                  className={classes.textField}
-                  onChange={(event) => this.props.handleChange('password', event)}
-                  margin="normal"
-                />
-                <TextField
-                  id="c-password"
-                  label="Confirm Password"
-                  type="password"
-                  defaultValue={this.props.state.password_confirmation}
-                  className={classes.textField}
-                  onChange={(event) => this.props.handleChange('password_confirmation', event)}
-                  margin="normal"
-                />
-                <Button className={classes.signupButton} variant="outlined" onClick={this.props.signup}>
-                  Sign Up
+              <TextField
+                id="email"
+                label="Email"
+                type="email"
+                className={classes.textField}
+                value={this.props.state.name}
+                onChange={(event) => this.props.handleChange('email', event)}
+                margin="normal"
+              />
+              <TextField
+                id="password"
+                label="Password"
+                type="password"
+                defaultValue={this.props.state.password}
+                className={classes.textField}
+                onChange={(event) => this.props.handleChange('password', event)}
+                margin="normal"
+              />
+              <TextField
+                id="c-password"
+                label="Confirm Password"
+                type="password"
+                defaultValue={this.props.state.password_confirmation}
+                className={classes.textField}
+                onChange={(event) => this.props.handleChange('password_confirmation', event)}
+                margin="normal"
+              />
+              <Button className={classes.signupButton} variant="outlined" onClick={this.props.signup}>
+                Sign Up
                 </Button>
-                <Button href="/landing" className={classes.signupButton} variant="outlined">
-                  Already Registered? Login
+              <Button href="/landing" className={classes.signupButton} variant="outlined">
+                Already Registered? Login
                 </Button>
             </form>
           </div>

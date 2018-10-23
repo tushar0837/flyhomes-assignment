@@ -12,9 +12,16 @@ export const auth = {
         return window.localStorage.getItem('authentication_token')
     },
     getUserData: () => {
-        return JSON.parse(window.localStorage.getItem('user'))
+        return JSON.parse(window.localStorage.getItem('user')) || {}
     },
     setUserData: (user) => {
-        window.localStorage.setItem('user', JSON.stringify(user))
+        window.localStorage.setItem('user', JSON.stringify({
+            first_name: '',
+            last_name: '',
+            city: '',
+            country: '',
+            phone: '',
+            ...(user || {})
+        }))
     }
 }

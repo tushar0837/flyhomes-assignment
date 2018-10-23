@@ -5,16 +5,16 @@ import HomeComponent from '../../components/home'
 
 
 class Home extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       activeStep: 0,
-   };
-   this.validateAuthentication();
+    };
+    this.validateAuthentication();
   }
 
   validateAuthentication = () => {
-    if(!auth.checkToken()){
+    if (!auth.checkToken()) {
       this.props.history.push('/')
     }
   }
@@ -44,7 +44,7 @@ class Home extends Component {
         handleBack={this.handleBack}
         handleReset={this.handleReset}
         state={this.state}
-        props={this.props }
+        props={this.props}
       />
     );
   }

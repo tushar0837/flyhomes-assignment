@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { API } from '../../api_path_constants';
 import SurveyComponent from '../../components/survey'
 
-class Survey extends Component {
+class SurveyList extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -29,15 +29,46 @@ class Survey extends Component {
             { name: "store_mall_directory", text: "Shop", selected: false },
             { name: "business", text: "Office", selected: false }]
         }
-        this.createSurvey()
+        this.loadData()
     }
-    createSurvey = () => {
-        API.createRequest("surveys", "create_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties, this.state.completed).then(res => {
+
+    loadData = () => {
+        API.createRequest("surveys", "get_survey")().then(res => {
             return res.json()
         }).then(response => {
-            this.setState({ surveyId: response.survey.id })
+            if (response.message !== "success") {
+                this.props.history.push("/home")
+            } else if (response.survey.findIndex(x => x.id.toString() === this.props.match.params.id) >= 0) {
+                let survey = response.survey[response.survey.findIndex(x => x.id.toString() === this.props.match.params.id)]
+                this.setState({ surveyId: survey.id })
+                this.setState({ priceMin: survey.price_min, priceMax: survey.price_max })
+                this.manageProperties(survey.properties)
+                this.managePlaces(survey.places)
+            } else {
+                this.props.history.push("/home")
+            }
         })
     }
+
+    managePlaces = (placesFromServer) => {
+        let selectedPlaces = [], places = []
+        this.state.placeOptions.forEach((place) => {
+            if (placesFromServer.indexOf(place.label) >= 0) {
+                selectedPlaces.push(place)
+                places.push(place.label)
+            }
+        })
+        this.setState({ selectedPlaces, places })
+    }
+    manageProperties = (properties) => {
+        let property = this.state.allTypes.map((type) => {
+            properties.indexOf(type.text) >= 0 ? type.selected = true : type.selected = false
+            return type
+        })
+        this.setState({ allTypes: property })
+        this.setState({ properties })
+    }
+
     updateServer = () => {
         API.createRequest("surveys", "update_survey")(this.state.priceMin, this.state.priceMax, this.state.places, this.state.properties, this.state.completed, this.state.surveyId).then(res => {
             return res.json()
@@ -59,7 +90,7 @@ class Survey extends Component {
         })
     }
     priceChange = (type, event) => {
-        this.setState({[type]: event.target.value.replace(/^0+/, '') || "0"}, () => {
+        this.setState({ [type]: event.target.value.replace(/^0+/, '') || "0" }, () => {
             this.updateServer()
         })
     }
@@ -93,4 +124,4 @@ class Survey extends Component {
         );
     }
 }
-export default Survey;
+export default SurveyList;

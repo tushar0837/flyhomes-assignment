@@ -27,6 +27,12 @@ export const API = {
                 body: JSON.stringify({ user: { email, password, password_confirmation }})
             }
         }),
+        sign_out: () => ({
+            path: BASE_URL+'auth/sign_out',
+            options: {
+                method: 'DELETE'
+            }
+        }),
         profile: (first_name, last_name, phone, city, country) => ({
             path: BASE_URL+`api/v1/users/${auth.getUserData().id}`,
             options: {
@@ -43,8 +49,8 @@ export const API = {
                 body: JSON.stringify({survey: {price_min, price_max, places, properties, completed}})
             }
         }),
-        update_survey: (price_min, price_max, places, properties, completed) => ({
-            path: BASE_URL+`api/v1/surveys/${auth.getUserData().id}`,
+        update_survey: (price_min, price_max, places, properties, completed, id) => ({
+            path: BASE_URL+`api/v1/surveys/${id}`,
             options: {
                 method: 'PUT',
                 body: JSON.stringify({survey: {price_min, price_max, places, properties, completed}})
